@@ -29,8 +29,7 @@ public class MessageListener {
     public void listen(Message message) {
         log.info("sending via kafka listener...");
 
-        //1. 여기서 경로로 나눈다
-        //2.
-//        template.convertAndSend("/topic/group/", message);
+        template.convertAndSend(String.format("/topic/%s",
+                chatRoomSessionCache.getSession(message.getAuthor())) , message);
     }
 }

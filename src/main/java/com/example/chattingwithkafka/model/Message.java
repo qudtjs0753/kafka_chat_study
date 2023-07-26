@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Message implements Serializable {
     private String author;
-    private int session;
+    private String session;
     private String content;
     private String timestamp;
 
@@ -27,11 +27,11 @@ public class Message implements Serializable {
         this.content = content;
     }
 
-    public int getSession() {
+    public String getSession() {
         return session;
     }
 
-    public void setSession(int session) {
+    public void setSession(String session) {
         this.session = session;
     }
 
