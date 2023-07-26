@@ -12,6 +12,12 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class MessageListener {
+    //방과 관련된 session 저장소가 필요해보임
+    private ChatRoomSessionCache chatRoomSessionCache;
+
+    public MessageListener() {
+        chatRoomSessionCache = ChatRoomSessionCache.getInstance();
+    }
 
     @Autowired
     SimpMessagingTemplate template;
@@ -22,6 +28,9 @@ public class MessageListener {
     )
     public void listen(Message message) {
         log.info("sending via kafka listener...");
-        template.convertAndSend("/topic/group", message);
+
+        //1. 여기서 경로로 나눈다
+        //2.
+//        template.convertAndSend("/topic/group/", message);
     }
 }

@@ -4,16 +4,15 @@ import java.io.Serializable;
 
 public class Message implements Serializable {
     private String author;
+    private int session;
     private String content;
     private String timestamp;
+
+
 
     public Message() {
     }
 
-    public Message(String author, String content) {
-        this.author = author;
-        this.content = content;
-    }
 
     public String getAuthor() {
         return author;
@@ -21,6 +20,19 @@ public class Message implements Serializable {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Message(String author, String content) {
+        this.author = author;
+        this.content = content;
+    }
+
+    public int getSession() {
+        return session;
+    }
+
+    public void setSession(int session) {
+        this.session = session;
     }
 
     public String getContent() {
@@ -42,7 +54,7 @@ public class Message implements Serializable {
     @Override
     public String toString() {
         return "Message{" +
-                "author='" + author + '\'' +
+                "session='" + session + '\'' +
                 ", content='" + content + '\'' +
                 ", timestamp='" + timestamp + '\'' +
                 '}';
