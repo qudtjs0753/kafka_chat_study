@@ -13,11 +13,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageListener {
     //방과 관련된 session 저장소가 필요해보임
-    private ChatRoomSessionCache chatRoomSessionCache;
 
-    public MessageListener() {
-        chatRoomSessionCache = ChatRoomSessionCache.getInstance();
-    }
+    @Autowired
+    private ChatRoomSessionCache chatRoomSessionCache;
 
     @Autowired
     SimpMessagingTemplate template;
@@ -27,8 +25,7 @@ public class MessageListener {
             groupId = KafkaConstants.GROUP_ID
     )
     public void listen(Message message) {
-        log.info("sending via kafka listener...");
-
+        System.out.println(String.format("/topic/%s", chatRoomSessionCache.getSession(message.getAuthor())));
         template.convertAndSend(String.format("/topic/%s",
                 chatRoomSessionCache.getSession(message.getAuthor())) , message);
     }

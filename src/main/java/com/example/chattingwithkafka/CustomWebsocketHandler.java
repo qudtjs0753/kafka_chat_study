@@ -1,5 +1,6 @@
 //package com.example.chattingwithkafka;
 //
+//import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Component;
 //import org.springframework.web.socket.CloseStatus;
 //import org.springframework.web.socket.TextMessage;
@@ -9,6 +10,7 @@
 //@Component
 //public class CustomWebsocketHandler extends TextWebSocketHandler {
 //
+//    @Autowired
 //    private ChatRoomSessionCache sessions;
 //
 //

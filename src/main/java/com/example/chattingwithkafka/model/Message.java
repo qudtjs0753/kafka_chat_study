@@ -54,7 +54,8 @@ public class Message implements Serializable {
     @Override
     public String toString() {
         return "Message{" +
-                "session='" + session + '\'' +
+                "author='" + author + '\'' +
+                ", session='" + session + '\'' +
                 ", content='" + content + '\'' +
                 ", timestamp='" + timestamp + '\'' +
                 '}';

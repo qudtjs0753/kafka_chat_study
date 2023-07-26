@@ -3,12 +3,13 @@ package com.example.chattingwithkafka;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import org.springframework.stereotype.Component;
+
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+@Component
 public class ChatRoomSessionCache {
-
-    private static ChatRoomSessionCache chatRoomSessionCache;
     private LoadingCache<String, String> sessions;
 
     private ChatRoomSessionCache() {
@@ -23,13 +24,6 @@ public class ChatRoomSessionCache {
                                 return sessions.get(key);
                             }
                         });
-    }
-
-    public static ChatRoomSessionCache getInstance() {
-        if(chatRoomSessionCache==null) {
-            chatRoomSessionCache = new ChatRoomSessionCache();
-        }
-        return chatRoomSessionCache;
     }
 
     //만약 유저 하나가 여러 세션에 있다면?
