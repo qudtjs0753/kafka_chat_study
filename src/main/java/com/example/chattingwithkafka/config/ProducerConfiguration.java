@@ -1,4 +1,4 @@
-package com.example.chattingwithkafka;
+package com.example.chattingwithkafka.config;
 
 
 import com.example.chattingwithkafka.model.KafkaConstants;

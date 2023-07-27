@@ -1,4 +1,4 @@
-package com.example.chattingwithkafka;
+package com.example.chattingwithkafka.storage;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;

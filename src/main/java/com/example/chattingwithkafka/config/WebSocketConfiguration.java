@@ -1,4 +1,4 @@
-package com.example.chattingwithkafka;
+package com.example.chattingwithkafka.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.ChannelRegistration;

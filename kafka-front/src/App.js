@@ -42,7 +42,7 @@ function App() {
         <div className="chat-container">
           <SockJsClient
             url={"http://localhost:8080/my-chat/"}
-            topics={[`/topic/${(user.name - "a") % 2}`]}
+            topics={[`/topic/user/${user.name}`]}
             onConnect={console.log("connected!")}
             onDisconnect={console.log("disconnected!")}
             onMessage={(msg) => onMessageReceived(msg)}

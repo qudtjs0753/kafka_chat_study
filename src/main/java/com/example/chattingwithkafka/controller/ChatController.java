@@ -1,14 +1,14 @@
-package com.example.chattingwithkafka;
+package com.example.chattingwithkafka.controller;
 
+import com.example.chattingwithkafka.storage.ChatRoomSessionCache;
 import com.example.chattingwithkafka.model.KafkaConstants;
 import com.example.chattingwithkafka.model.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -37,6 +37,9 @@ public class ChatController {
     @Autowired
     private KafkaTemplate<String, Message> kafkaTemplate;
 
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
+
     //kafka cluster에 메세지 전송
     @PostMapping(value = "kafka/publish")
     public void sendMessage(@RequestBody Message message) {
@@ -44,17 +47,10 @@ public class ChatController {
         System.out.println(message);
         //key값 설정해서 kafka에 전송
         try {
-            kafkaTemplate.send(KafkaConstants.KAFKA_TOPIC, message);
+            //여기서 @Header("user_id")값 설정해준다(2번째 매개변수)
+            kafkaTemplate.send(KafkaConstants.KAFKA_TOPIC, message.getAuthor(), message);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    //구독중인 유저에게 돌려주는 곳
-    @MessageMapping("kafka/sendMessage/{chatRoomId}")
-    @SendTo("kafka/topic/{chatRoomId}")
-    public Message broadcastGroupMessage(@Payload Message message, @DestinationVariable String chatRoomId) {
-        System.out.println("message");
-        return message;
     }
 }
